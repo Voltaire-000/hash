@@ -18,13 +18,13 @@ Blockchain.prototype.creatGenesisBlock = function(){
 	};
 }
 
-Blockchain.prototype.getLastBlock = function(){
+function getLastBlock(){
 	return this.chain[this.chain.length - 1];
 }
 
-function generateHash(previousBlockHash, timestamp, nonce, transactions){
+function generateHash(previoussBlockHash, timestamp, nonce, transactions){
 	let hash = "";
-	let nonce = 0;
+	// let nonce = 0;
 	
 	while (hash.substring(0, 3)!== "000"){
 		nonce++;
@@ -38,23 +38,7 @@ function generateHash(previousBlockHash, timestamp, nonce, transactions){
 return(hash, nonce);
 }
 
-/* generateHash(previousBlockHash, timestamp, pendingTransactions) {
-	let hash = "";
-	let nonce = 0;
-	
-	while (hash.substring(0, 3) !== "000"){
-		nonce++;
-		hash = SHA256(
-			previousBlockHash +
-			timestamp + 
-			JSON.stringify(pendingTransactions) +
-			nonce
-			).toString();
-	}
-	return (hash, nonce);
-} */
-
-function createNewTransaction(amount, sender, recipient){
+Blockchain.prototype.createNewTransaction = function(amount, sender, recipient){
 	const newTransaction = {
 		amount,
 		sender,
@@ -63,7 +47,26 @@ function createNewTransaction(amount, sender, recipient){
 	this.pendingTransactions.push(newTransaction);
 }
 
-function createNewBlock(){
+Blockchain.prototype.minePendingTransactions = function(minerRewardAddress){
+	const newBlock = {
+		index: this.chain.length + 1,
+		timestamp: Date.now(),
+		transactions: this.pendingTransactions,
+		nonce: generateHash.nonce,
+		hash: generateHash.hash,
+		previousBlockHash: this.getLastBlock().hash,
+	};
+
+	newBlock.transactions.push({
+		amount: minerRewardAddress,
+		sender: "0",
+		recipient: minerRewardAddress,
+	});
+
+	this.
+
+
+/* function createNewBlock(){
 	const timestamp = Date.now();
 	const transactions = this.pendingTransactions;
 	const previousBlockHash = this.getLastBlock().hash;
@@ -86,6 +89,6 @@ function createNewBlock(){
 	this.chain.push(newBlock);
 	
 	return newBlock;
-}
+} */
 
-module.exports = Blockchain;			
+module.exports = Blockchain;		
