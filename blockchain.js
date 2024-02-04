@@ -7,7 +7,7 @@ class Blockchain{
 	}
 }
 
-creatGenesisBlock(){
+Blockchain.prototype.creatGenesisBlock = function(){
 	return {
 		index: 1,
 		timestamp: Date.now(),
@@ -18,7 +18,21 @@ creatGenesisBlock(){
 	};
 }
 
-getLastBlock(){
+/* creatGenesisBlock(){
+	return {
+		index: 1,
+		timestamp: Date.now(),
+		transactions: [],
+		nonce: 0,
+		hash: "hash",
+		previousBlockHash: "previousBlockHash",
+	};
+} */
+
+/* getLastBlock(){
+	return this.chain[this.chain.length - 1];
+} */
+Blockchain.prototype.getLastBlock = function(){
 	return this.chain[this.chain.length - 1];
 }
 
