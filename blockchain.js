@@ -64,19 +64,6 @@ Blockchain.prototype.generateHash = function(previousBlockHash, timestamp, nonce
 return(hash, nonce);
 }
 
-/* 
-Blockchain.prototype.getHash = function(block
-		){
-	const hash = SHA256(
-		block.index +
-		block.timestamp +
-		block.transactions +
-		block.nonce
-	).toString();
-	return hash;
-}
- */
-
 Blockchain.prototype.createNewTransaction = function(amount, sender, recipient){
 	const newTransaction = {
 		amount,
