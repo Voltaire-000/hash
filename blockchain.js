@@ -5,7 +5,7 @@ class Blockchain{
 		this.chain = [this.creatGenesisBlock()];
 		this.pendingTransactions = [];
 	}
-};
+}
 
 
 creatGenesisBlock(){
@@ -17,11 +17,11 @@ creatGenesisBlock(){
 		hash: "hash",
 		previousBlockHash: "previousBlockHash",
 	};
-};
+}
 
 getLastBlock(){
 	return this.chain[this.chain.length - 1];
-};
+}
 
 generateHash(previousBlockHash, timestamp, pendingTransactions) {
 	let hash = "";
