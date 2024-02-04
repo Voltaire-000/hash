@@ -18,8 +18,11 @@ Blockchain.prototype.creatGenesisBlock = function(){
 	};
 }
 
-Blockchain.prototype.getLastBlock = function(){
-	return this.chain[this.chain.length - 1];
+Blockchain.prototype.getLastBlock = function() {
+    if (this.chain.length === 0) {
+        throw new Error("Blockchain is empty");
+    }
+    return this.chain[this.chain.length - 1];
 }
 
 
