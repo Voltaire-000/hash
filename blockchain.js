@@ -3,10 +3,9 @@ const SHA256 = require("sha256");
 class Blockchain{
 	constructor () {
 		this.chain = [this.creatGenesisBlock()];
-		this.pendingTransactions = [];
+		this.pendingTransactions = []
 	}
 }
-
 
 creatGenesisBlock(){
 	return {
