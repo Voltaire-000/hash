@@ -10,16 +10,18 @@ class Blockchain {
         return new Block(0, "0", "Genesis Block");
     }
 }
-
-Blockchain.prototype.creatGenesisBlock = function(){
-	return {
-		index: 1,
-		timestamp: Date.now(),
-		transactions: [],
-		nonce: 0,
-		hash: "hash",
-		previousBlockHash: "previousBlockHash",
-	};
+Blockchain.prototype.createGenesisBlock = function() {
+    if (this.chain.length === 0) {
+        throw new Error("Blockchain is empty");
+    }
+    return {
+        index: 1,
+        timestamp: Date.now(),
+        transactions: [],
+        nonce: 0,
+        hash: "hash",
+        previousBlockHash: "previousBlockHash",
+    };
 }
 
 Blockchain.prototype.getLastBlock = function() {
