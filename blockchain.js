@@ -31,23 +31,6 @@ Blockchain.prototype.getLastBlock = function() {
     return this.chain[this.chain.length - 1];
 }
 
-
-/* function generateHash(previoussBlockHash, timestamp, nonce, transactions){
-	let hash = "";
-	// let nonce = 0;
-	
-	while (hash.substring(0, 3)!== "000"){
-		nonce++;
-		hash = SHA256(
-			previousBlockHash +
-			timestamp +
-			JSON.stringify(transactions) +
-			nonce
-		).toString();
-	}
-return(hash, nonce);
-} */
-
 Blockchain.prototype.generateHash = function(previousBlockHash, timestamp, nonce, transactions){
 	let hash = "";
 	// let nonce = 0;
