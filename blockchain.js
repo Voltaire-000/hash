@@ -1,4 +1,4 @@
-const SHA256 = require("sha256");
+import SHA256 from "sha256";
 
 class Blockchain {
     constructor() {
@@ -71,4 +71,4 @@ Blockchain.prototype.createNewBlock = function(){
 	return newBlock;
 }
 
-module.exports = Blockchain;		
+export default Blockchain;		
