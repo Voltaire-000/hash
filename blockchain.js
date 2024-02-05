@@ -11,9 +11,9 @@ class Blockchain {
     }
 }
 Blockchain.prototype.createGenesisBlock = function() {
-    if (this.chain.length === 0) {
+/*     if (this.chain.length === 0) {
         throw new Error("Blockchain is empty");
-    }
+    } */
     return {
         index: 1,
         timestamp: Date.now(),
@@ -25,9 +25,9 @@ Blockchain.prototype.createGenesisBlock = function() {
 }
 
 Blockchain.prototype.getLastBlock = function() {
-    if (this.chain.length === 0) {
+/*     if (this.chain.length === 0) {
         throw new Error("Blockchain is empty");
-    }
+    } */
     return this.chain[this.chain.length - 1];
 }
 
