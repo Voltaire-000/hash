@@ -1,4 +1,4 @@
-import SHA256 from "sha256";
+const SHA256 = require('sha256');
 
 class Blockchain {
     constructor() {
@@ -11,49 +11,38 @@ class Blockchain {
     }
 }
 Blockchain.prototype.createGenesisBlock = function() {
-/*     if (this.chain.length === 0) {
-        throw new Error("Blockchain is empty");
-    } */
     return {
         index: 1,
         timestamp: Date.now(),
         transactions: [],
         nonce: 0,
-        hash: "hash",
-        previousBlockHash: "previousBlockHash",
+        hash: "genesisHash",
+        previousBlockHash: "genesisPreviousBlockHash",
     };
 }
 
 Blockchain.prototype.getLastBlock = function() {
-/*     if (this.chain.length === 0) {
-        throw new Error("Blockchain is empty");
-    } */
-    return this.chain[this.chain.length - 1];
+    if (this.chain.length > 0) {
+        return this.chain[this.chain.length - 1];
+    } else {
+        throw new Error("Blockchain is empty, there are no blocks to retrieve.");
+    }
 }
 
-Blockchain.prototype.generateHash = function(previousBlockHash, timestamp, nonce, transactions){
-	let hash = "";
-	// let nonce = 0;
-	
-	while (hash.substring(0, 3)!== "000"){
-		nonce++;
-		hash = SHA256(
-			previousBlockHash +
-			timestamp +
-			JSON.stringify(transactions) +
-			nonce
-		).toString();
-	}
-return(hash, nonce);
-}
+Blockchain.prototype.generateHash = function(data) {
+  return SHA256(data).toString();
+};
 
 Blockchain.prototype.createNewTransaction = function(amount, sender, recipient){
-	const newTransaction = {
-		amount,
-		sender,
-		recipient,
-	};
-	this.pendingTransactions.push(newTransaction);
+  if (!this.pendingTransactions) {
+    this.pendingTransactions = [];
+  }
+  const newTransaction = {
+    amount,
+    sender,
+    recipient,
+  };
+  this.pendingTransactions.push(newTransaction);
 }
 
 Blockchain.prototype.createNewBlock = function(){
@@ -61,14 +50,15 @@ Blockchain.prototype.createNewBlock = function(){
 		index: this.chain.length + 1,
 		timestamp: Date.now(),
 		transactions: this.pendingTransactions,
-		nonce: this.generateHash.nonce,
-		hash: this.generateHash.hash,
+		nonce: String(Math.random()),
+		hash: String(Math.random()),
 		previousBlockHash: this.getLastBlock().hash,
 	};
+	newBlock.hash = this.generateHash(JSON.stringify(newBlock));
 	this.pendingTransactions = [];
 	this.chain.push(newBlock);
 	
 	return newBlock;
 }
 
-export default Blockchain;		
+module.exports = Blockchain;	
